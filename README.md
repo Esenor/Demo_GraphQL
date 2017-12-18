@@ -29,7 +29,7 @@
     -H 'Content-Type: application/json' \
     -d '{"query":"{addCustomer(name: \"Lorem\", lastName: \"Ipsum\", mail:  \"lorem_ipsum@gmail.com\") {id,mail},}"}'
 
-### Get customer by mail###
+### Get customer by mail ###
 
     curl -X POST \
     http://localhost:3000/ \

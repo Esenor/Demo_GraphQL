@@ -3,7 +3,7 @@ const graphqlHTTP = require('express-graphql')
 const { buildSchema } = require('graphql')
 const customersModel = require('./customersModel')
 
-let schema = buildSchema(`  
+let rawSchema = `  
   type Customer {
     id: ID
     name: String
@@ -16,7 +16,8 @@ let schema = buildSchema(`
     addCustomer(name: String!, lastName: String!, mail: String!): Customer
     listCustomers: [Customer]
   }
-`)
+`
+let schema = buildSchema(rawSchema)
 
 let root = {
   getCustomer: (args) => {
@@ -38,4 +39,4 @@ app.use('/', graphqlHTTP({
 }))
 
 let server = app.listen(3000)
-console.log('Started on localhost:3000')
+console.log(`***************\n*** GRAPHQL ***\n\nStarted on http://localhost:3000\n----------\nSchemas availables\n${rawSchema}`)

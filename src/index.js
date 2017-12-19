@@ -11,9 +11,12 @@ let rawSchema = `
     mail: String
   }
 
+  type Mutation {
+    addCustomer(name: String!, lastName: String!, mail: String!): Customer
+  }
+
   type Query {
     getCustomer(mail: String!): Customer
-    addCustomer(name: String!, lastName: String!, mail: String!): Customer
     listCustomers: [Customer]
   }
 `

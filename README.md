@@ -1,4 +1,4 @@
-#TW_GraphQL#
+# TW_GraphQL #
 
 ## usage ##
 
@@ -10,16 +10,19 @@
 ### Schema ###
 
     type Customer {
-      id: ID
-      name: String
-      lastName: String
-      mail: String
+        id: ID
+        name: String
+        lastName: String
+        mail: String
+    }
+
+    type Mutation {
+        addCustomer(name: String!, lastName: String!, mail: String!): Customer
     }
 
     type Query {
-      getCustomer(mail: String!): Customer
-      addCustomer(name: String!, lastName: String!, mail: String!): Customer
-      listCustomers: [Customer]
+        getCustomer(mail: String!): Customer
+        listCustomers: [Customer]
     }
 
 ### Add customer ###
@@ -27,9 +30,9 @@
     curl -X POST \
     http://localhost:3000/ \
     -H 'Content-Type: application/json' \
-    -d '{"query":"{addCustomer(name: \"Lorem\", lastName: \"Ipsum\", mail:  \"lorem_ipsum@gmail.com\") {id,mail},}"}'
+    -d '{"query":"mutation {addCustomer(name: \"Lorem\", lastName: \"Ipsum\", mail:  \"lorem_ipsum@gmail.com\") {id,mail},}"}'
 
-### Get customer by mail###
+### Get customer by mail ###
 
     curl -X POST \
     http://localhost:3000/ \

@@ -18,10 +18,10 @@ module.exports = {
       throw `Mail ${mail} already exist`
     } else {
       let tmpAddresses = []
-      addresses.forEach((rawAddress) => {
+      let baseAddresses = (addresses) ? addresses : []
+      baseAddresses.forEach((rawAddress) => {
         tmpAddresses.push(new Address(rawAddress.street, rawAddress.city, rawAddress.zipcode))
       })
-      console.log(tmpAddresses)
       let customer = new Customer(name, lastName, mail, tmpAddresses)
       customersData.push(customer)
       return customer

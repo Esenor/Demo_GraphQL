@@ -9,7 +9,7 @@ module.exports = {
   /**
    * 
    */
-  addCustomer: (name, lastName, mail) => {
+  addCustomer: function (name, lastName, mail) {
     let exist = customersData.reduce((exist, customer) => {
       return exist || customer.mail === mail
     }, false)
@@ -24,7 +24,17 @@ module.exports = {
   /**
    * 
    */
-  getCustomer: (mail) => {
+  addCustomers: function (customers) {
+    let newCustomers = []
+    customers.forEach((customer) => {
+      newCustomers.push(this.addCustomer(customer.name, customer.lastName, customer.mail))
+    })
+    return newCustomers
+  },
+  /**
+   * 
+   */
+  getCustomer: function (mail) {
     let customer = customersData.find((customer) => {
       return customer.mail === mail
     })
@@ -37,7 +47,7 @@ module.exports = {
   /**
    * 
    */
-  getCustomers: () => {
+  getCustomers: function () {
     return customersData
   }
 }

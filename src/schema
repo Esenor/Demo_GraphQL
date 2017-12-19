@@ -1,0 +1,38 @@
+#############################################
+#############################################
+### CUSTOM TYPE
+
+type Customer {
+  id: ID
+  name: String
+  lastName: String
+  mail: String
+}
+
+#############################################
+#############################################
+### INPUT CUSTOM TYPE
+
+input CustomerInput {
+  name: String!
+  lastName: String!
+  mail: String!
+}
+
+#############################################
+#############################################
+### MUTATION
+
+type Mutation {
+  addCustomer(customer: CustomerInput!): Customer
+  addCustomers(customers: [CustomerInput]!): [Customer]
+}
+
+#############################################
+#############################################
+### QUERY
+
+type Query {
+  getCustomer(mail: String!): Customer
+  listCustomers: [Customer]
+}

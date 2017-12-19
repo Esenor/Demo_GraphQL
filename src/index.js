@@ -1,45 +1,22 @@
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const { buildSchema } = require('graphql')
-const customersModel = require('./customersModel')
+const schemaParser = require('./schemaParser')
+const resolver = require('./resolver')
 
-let rawSchema = `  
-  type Customer {
-    id: ID
-    name: String
-    lastName: String
-    mail: String
-  }
-
-  type Mutation {
-    addCustomer(name: String!, lastName: String!, mail: String!): Customer
-  }
-
-  type Query {
-    getCustomer(mail: String!): Customer
-    listCustomers: [Customer]
-  }
-`
-let schema = buildSchema(rawSchema)
-
-let root = {
-  getCustomer: (args) => {
-    return customersModel.getCustomer(args.mail)
-  },
-  addCustomer: (args) => {
-    return customersModel.addCustomer(args.name, args.lastName, args.mail)
-  },
-  listCustomers: () => {
-    return customersModel.getCustomers()
-  }
+function createApplication () {
+  let application = express()
+  application.use('/', graphqlHTTP({
+    schema: buildSchema(schemaParser.getSchema()),
+    rootValue: resolver,
+    graphiql: true
+  }))
+  return application
 }
 
-let app = express()
-app.use('/', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true
-}))
+function startServer (application, port) {
+  console.log(`***************\n*** GRAPHQL ***\n\nStarted on http://localhost:3000\n----------\nSchemas availables\n${schemaParser.getSchema()}`)
+  return application.listen(port)
+}
 
-let server = app.listen(3000)
-console.log(`***************\n*** GRAPHQL ***\n\nStarted on http://localhost:3000\n----------\nSchemas availables\n${rawSchema}`)
+startServer(createApplication(), 3000)

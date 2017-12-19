@@ -12,40 +12,55 @@
     #############################################
     #############################################
     ### CUSTOM TYPE
-    
+
     type Customer {
-      id: ID
-      name: String
-      lastName: String
-      mail: String
+        id: ID
+        name: String
+        lastName: String
+        mail: String
+        addresses: [Address]
     }
-    
+
+    type Address {
+        id: ID
+        street: String!
+        city: String!
+        zipcode: String!
+    }
+
     #############################################
     #############################################
     ### INPUT CUSTOM TYPE
-    
+
     input CustomerInput {
-      name: String!
-      lastName: String!
-      mail: String!
+        name: String!
+        lastName: String!
+        mail: String!
+        addresses: [AddressInput]
     }
-    
+
+    input AddressInput {
+        street: String!
+        city: String!
+        zipcode: String!
+    }
+
     #############################################
     #############################################
     ### MUTATION
-    
+
     type Mutation {
-      addCustomer(customer: CustomerInput!): Customer
-      addCustomers(customers: [CustomerInput]!): [Customer]
+        addCustomer(customer: CustomerInput!): Customer
+        addCustomers(customers: [CustomerInput]!): [Customer]
     }
-    
+
     #############################################
     #############################################
     ### QUERY
-    
+
     type Query {
-      getCustomer(mail: String!): Customer
-      listCustomers: [Customer]
+        getCustomer(mail: String!): Customer
+        listCustomers: [Customer]
     }
 
 ### Add customer ###
@@ -55,7 +70,7 @@
     curl -X POST \
     http://localhost:3000/ \
     -H 'Content-Type: application/json' \
-    -d '{"query":"mutation {addCustomer(customer: {name: \"Lorem\", lastName: \"Ipsum\", mail: \"lorem_ipsum@gmail.com\"}) {id,mail}}"}'
+    -d '{"query":"mutation {addCustomer(customer: {name: \"Lorem\", lastName: \"Ipsum\", mail: \"lorem_ipsum@gmail.com\", addresses: [{street: \"1 street lorrem\", city: \"London\", zipcode: \"654884\"}]}) {id,mail}}"}'
 
 #### Chained mutation ####
 
@@ -86,4 +101,4 @@
 ### List all customers ###
 
     curl -X GET \
-    'http://localhost:3000?query={customers:listCustomers{id,name,mail}}'
+    'http://localhost:3000?query={customers:listCustomers{id,name,mail,addresses{street,city,zipcode}}}'

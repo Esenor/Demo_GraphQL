@@ -8,10 +8,11 @@ module.exports = class Customer {
    * @param {*} mail 
    * @param {*} id 
    */
-  constructor (name, lastName, mail, id) {
+  constructor(name, lastName, mail, addresses, id) {
     this.id = (id) ? id : uuidv4()
     this.name = name
     this.lastName = lastName
     this.mail = mail
+    this.addresses = addresses
   }
 }

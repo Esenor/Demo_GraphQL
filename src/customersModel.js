@@ -1,4 +1,5 @@
 const Customer = require('./Customer')
+const Address = require('./Address')
 
 /**
  * 
@@ -9,14 +10,19 @@ module.exports = {
   /**
    * 
    */
-  addCustomer: function (name, lastName, mail) {
+  addCustomer: function (name, lastName, mail, addresses) {
     let exist = customersData.reduce((exist, customer) => {
       return exist || customer.mail === mail
     }, false)
     if (exist) {
       throw `Mail ${mail} already exist`
     } else {
-      let customer = new Customer(name, lastName, mail)
+      let tmpAddresses = []
+      addresses.forEach((rawAddress) => {
+        tmpAddresses.push(new Address(rawAddress.street, rawAddress.city, rawAddress.zipcode))
+      })
+      console.log(tmpAddresses)
+      let customer = new Customer(name, lastName, mail, tmpAddresses)
       customersData.push(customer)
       return customer
     }
@@ -27,7 +33,7 @@ module.exports = {
   addCustomers: function (customers) {
     let newCustomers = []
     customers.forEach((customer) => {
-      newCustomers.push(this.addCustomer(customer.name, customer.lastName, customer.mail))
+      newCustomers.push(this.addCustomer(customer.name, customer.lastName, customer.mail, (customer.addresses) ? customer.addresses : []))
     })
     return newCustomers
   },

@@ -4,6 +4,9 @@ const { buildSchema } = require('graphql')
 const schemaParser = require('./schemaParser')
 const resolver = require('./resolver')
 
+/**
+ * 
+ */
 function createApplication () {
   let application = express()
   application.use('/', graphqlHTTP({
@@ -14,6 +17,11 @@ function createApplication () {
   return application
 }
 
+/**
+ * 
+ * @param {*} application 
+ * @param {*} port 
+ */
 function startServer (application, port) {
   console.log(`***************\n*** GRAPHQL ***\n\nStarted on http://localhost:3000\n----------\nSchemas availables\n${schemaParser.getSchema()}`)
   return application.listen(port)

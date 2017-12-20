@@ -1,16 +1,21 @@
-const Customer = require('./Customer')
-const Address = require('./Address')
+const Customer = require('./entity/Customer')
+const Address = require('./entity/Address')
 
 /**
- * 
+ * Temp data storage
  */
 let customersData = []
 
-module.exports = {
+module.exports = class CustomerModel{
   /**
-   * 
+   * Add customer to customer storage
+   * @param {string} name
+   * @param {string} lastName
+   * @param {string} mail
+   * @param {[Object]} addresses
+   * @return {Customer}
    */
-  addCustomer: function (name, lastName, mail, addresses) {
+  static addCustomer (name, lastName, mail, addresses) {
     let exist = customersData.reduce((exist, customer) => {
       return exist || customer.mail === mail
     }, false)
@@ -26,21 +31,25 @@ module.exports = {
       customersData.push(customer)
       return customer
     }
-  },
+  }
   /**
-   * 
+   * Add an array of customers data to customer storage
+   * @param {[object]} customers
+   * @return {[Customer]}
    */
-  addCustomers: function (customers) {
+  static addCustomers (customers) {
     let newCustomers = []
     customers.forEach((customer) => {
       newCustomers.push(this.addCustomer(customer.name, customer.lastName, customer.mail, (customer.addresses) ? customer.addresses : []))
     })
     return newCustomers
-  },
+  }
   /**
-   * 
+   * Return a customer find by mail
+   * @param {string} mail
+   * @return {Customer}
    */
-  getCustomer: function (mail) {
+  static getCustomer (mail) {
     let customer = customersData.find((customer) => {
       return customer.mail === mail
     })
@@ -49,11 +58,12 @@ module.exports = {
     } else {
       throw `Customer not found`
     }
-  },
+  }
   /**
-   * 
+   * Return all the customers storage
+   * @return {[Customer]}
    */
-  getCustomers: function () {
+  static getCustomers () {
     return customersData
   }
 }

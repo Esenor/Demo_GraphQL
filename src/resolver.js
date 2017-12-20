@@ -1,33 +1,41 @@
-const customersModel = require('./customersModel')
+const CustomersModel = require('./CustomersModel')
 
-module.exports = {
+module.exports = class Resolver {
   /**
-   * 
+   * Return list of all customer
+   * @param {Object} args
+   * @return {[Customers]}
    */
-  getCustomer: (args) => {
-    return customersModel.getCustomer(args.mail)
-  },
+  static getCustomer (args) {
+    return CustomersModel.getCustomer(args.mail)
+  }
   /**
-   * 
+   * Add a customer to model and return a customer
+   * @param {Object} args
+   * @return {Customer}
    */
-  addCustomer: (args) => {
-    return customersModel.addCustomer(
+  static addCustomer (args) {
+    return CustomersModel.addCustomer(
       args.customer.name,
       args.customer.lastName,
       args.customer.mail,
       args.customer.addresses
     )
-  },
+  }
   /**
-   * 
+   * Add customers to model and return an array of customers
+   * @param {Object} args
+   * @return {[Customer]}
    */
-  addCustomers: (args) => {
-    return customersModel.addCustomers(args.customers)
-  },
+  static addCustomers (args) {
+    return CustomersModel.addCustomers(args.customers)
+  }
   /**
-   * 
+   * Return a array of all customer stored in the model
+   * @param {Object} args
+   * @return {[Customer]}
    */
-  listCustomers: () => {
-    return customersModel.getCustomers()
+  static listCustomers () {
+    return CustomersModel.getCustomers()
   }
 }

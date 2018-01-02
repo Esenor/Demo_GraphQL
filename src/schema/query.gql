@@ -1,0 +1,8 @@
+#############################################
+#############################################
+### QUERY
+
+type Query {
+  getCustomer(mail: String!): Customer
+  listCustomers: [Customer]
+}

@@ -1,0 +1,8 @@
+#############################################
+#############################################
+### MUTATION
+
+type Mutation {
+  addCustomer(customer: CustomerInput!): Customer
+  addCustomers(customers: [CustomerInput]!): [Customer]
+}

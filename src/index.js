@@ -5,6 +5,7 @@ const SchemaParser = require('./SchemaParser')
 const Resolver = require('./Resolver')
 const devTool = require('./devTool')
 
+const schema = SchemaParser.getSchema()
 /**
  * Create an Express application
  * @return {Express}
@@ -13,7 +14,7 @@ function createApplication () {
   let application = express()
   application.use('/', graphqlHTTP({
     // Load GQL Schema
-    schema: buildSchema(SchemaParser.getSchema()),
+    schema: buildSchema(schema.toString()),
     rootValue: Resolver,
     graphiql: true
   }))
@@ -27,7 +28,7 @@ function createApplication () {
  * @return {Server}
  */
 function startServer (application, port) {
-  console.log(`***************\n*** GRAPHQL ***\n\nStarted on http://localhost:3000\n----------\nSchemas availables\n${SchemaParser.getSchema()}`)
+  console.log(`***************\n*** GRAPHQL ***\n\nStarted on http://localhost:3000\n----------\nSchemas availables\n${schema}`)
   return application.listen(port)
 }
 

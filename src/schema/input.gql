@@ -1,7 +1,3 @@
-#############################################
-#############################################
-### INPUT TYPE
-
 input CustomerInput {
   name: String!
   lastName: String!

@@ -6,7 +6,13 @@ module.exports = {
    * Add 3 customer to customers storage
    */
   addSampleCustomer: () => {
-    CustomerModel.addCustomers(getFakeCustomers([0, 1, 2, 3]))
+    CustomerModel.addCustomers(getFakeCustomers([0, 2]))
+  },
+  /**
+   * Return 2 fake customers
+   */
+  getSampleCustomer: () => {
+    return getFakeCustomers([2, 1])
   }
 }
 

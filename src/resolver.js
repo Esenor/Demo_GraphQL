@@ -1,4 +1,5 @@
 const CustomersModel = require('./CustomersModel')
+const devTool = require('./devTool')
 
 module.exports = class Resolver {
   /**
@@ -37,5 +38,9 @@ module.exports = class Resolver {
    */
   static listCustomers () {
     return CustomersModel.getCustomers()
+  }
+
+  static generateRandomCustomers() {
+    return CustomersModel.addCustomers(devTool.getSampleCustomer())
   }
 }

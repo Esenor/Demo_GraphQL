@@ -1,18 +1,16 @@
-const CustomerModel = require('./CustomersModel')
 const faker = require('faker')
 
 module.exports = {
   /**
-   * Add 3 customer to customers storage
-   */
-  addSampleCustomer: () => {
-    CustomerModel.addCustomers(getFakeCustomers([0, 2]))
-  },
-  /**
    * Return 2 fake customers
    */
   getSampleCustomer: () => {
-    return getFakeCustomers([2, 1])
+    let customersSize = [Math.floor((Math.random() * 3) + 1)]
+    let addressesAssignation = []
+    for (let i = 0; i < customersSize; i++) {
+      addressesAssignation.push([Math.floor((Math.random() * 4) + 1)])
+    }
+    return getFakeCustomers(addressesAssignation)
   }
 }
 

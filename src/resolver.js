@@ -40,7 +40,12 @@ module.exports = class Resolver {
     return CustomersModel.getCustomers()
   }
 
-  static generateRandomCustomers() {
+  static generateRandomCustomers () {
     return CustomersModel.addCustomers(devTool.getSampleCustomer())
+  }
+
+  static truncateCustomers () {
+    CustomersModel.truncateCustomers()
+    return 'truncate finish'
   }
 }

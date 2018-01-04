@@ -56,4 +56,3 @@ function startServer (application, port) {
 
 // Start application
 startServer(createApplication().get(), 3042)
-devTool.addSampleCustomer()

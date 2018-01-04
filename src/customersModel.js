@@ -66,4 +66,10 @@ module.exports = class CustomerModel{
   static getCustomers () {
     return customersData
   }
+  /**
+   * Truncate all the customers storage
+   */
+  static truncateCustomers() {
+    customersData = []
+  }
 }

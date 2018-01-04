@@ -9,59 +9,7 @@
 
 ### Schema ###
 
-    #############################################
-    #############################################
-    ### CUSTOM TYPE
-
-    type Customer {
-        id: ID
-        name: String
-        lastName: String
-        mail: String
-        addresses: [Address]
-    }
-
-    type Address {
-        id: ID
-        street: String!
-        city: String!
-        zipcode: String!
-    }
-
-    #############################################
-    #############################################
-    ### INPUT CUSTOM TYPE
-
-    input CustomerInput {
-        name: String!
-        lastName: String!
-        mail: String!
-        addresses: [AddressInput]
-    }
-
-    input AddressInput {
-        street: String!
-        city: String!
-        zipcode: String!
-    }
-
-    #############################################
-    #############################################
-    ### MUTATION
-
-    type Mutation {
-        addCustomer(customer: CustomerInput!): Customer
-        addCustomers(customers: [CustomerInput]!): [Customer]
-    }
-
-    #############################################
-    #############################################
-    ### QUERY
-
-    type Query {
-        getCustomer(mail: String!): Customer
-        listCustomers: [Customer]
-    }
+See schema at `/src/schema`
 
 ### Add customer ###
 

@@ -5,6 +5,7 @@ const typeSchema = 'type.gql'
 const inputSchema = 'input.gql'
 const mutationSchema = 'mutation.gql'
 const querySchema = 'query.gql'
+const subscriptionSchema = 'subscription.gql'
 
 module.exports = class SchemaParser {
   /**
@@ -27,6 +28,7 @@ module.exports = class SchemaParser {
       this.input = getSchema(inputSchema)
       this.type = getSchema(typeSchema)
       this.mutation = getSchema(mutationSchema) 
+      this.subscription = getSchema(subscriptionSchema) 
     } catch (error) {
       throw error 
     }
@@ -36,14 +38,16 @@ module.exports = class SchemaParser {
         query: this.query,
         input: this.input,
         type: this.type,
-        mutation: this.mutation
+        mutation: this.mutation,
+        subscription: this.subscription
       },
       toString: () => {
         return [
           this.query,
           this.input,
           this.type,
-          this.mutation
+          this.mutation,
+          this.subscription
         ].join('')
       }
     }

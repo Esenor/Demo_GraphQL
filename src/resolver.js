@@ -1,6 +1,7 @@
 const CustomersModel = require('./CustomersModel')
 const devTool = require('./devTool')
 
+
 module.exports = class Resolver {
   /**
    * Return list of all customer
@@ -47,5 +48,9 @@ module.exports = class Resolver {
   static truncateCustomers () {
     CustomersModel.truncateCustomers()
     return 'truncate finish'
+  }
+
+  static customerAdded () {
+    return 'ToDo Subscription'
   }
 }

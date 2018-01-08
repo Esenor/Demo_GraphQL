@@ -14,6 +14,7 @@
     "express-graphql": "^0.6.11",
     "faker": "^4.1.0",
     "graphql": "^0.12.3",
+    "graphql-subscriptions": "^0.5.6",
     "uuid": "^3.1.0"
   }
 }

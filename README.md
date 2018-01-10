@@ -1,4 +1,4 @@
-# tw_graphql #
+# tw_graphql_express #
 
 ## usage ##
 

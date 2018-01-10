@@ -1,7 +1,7 @@
 {
-  "name": "tw_graphql",
+  "name": "tw_graphql_express",
   "version": "0.0.1",
-  "description": "Tech watch on graphQL",
+  "description": "Tech watch on graphQL with express",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js"

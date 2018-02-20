@@ -1,5 +1,5 @@
-const CustomersModel = require('./CustomersModel')
-const devTool = require('./devTool')
+const CustomersModel = require('../model/customersModel')
+const devTool = require('../devTool')
 
 
 module.exports = class Resolver {

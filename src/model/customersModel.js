@@ -1,5 +1,5 @@
-const Customer = require('./entity/Customer')
-const Address = require('./entity/Address')
+const Customer = require('../entity/Customer')
+const Address = require('../entity/Address')
 
 /**
  * Temp data storage

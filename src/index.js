@@ -1,13 +1,12 @@
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const { buildSchema } = require('graphql')
-const SchemaParser = require('./SchemaParser')
-const Resolver = require('./Resolver')
+const SchemaParser = require('./graphQL/schemaParser')
+const Resolver = require('./graphQL/resolver')
 const devTool = require('./devTool')
 const cors = require('cors')
 
 const schema = SchemaParser.getSchema()
-
 /**
  * Create an Express application
  * @return {Express}
@@ -32,7 +31,7 @@ function createApplication () {
   application.use(allowCrossDomain)
   application.use('/', graphqlHTTP({
     // Load GQL Schema
-    schema: buildSchema(schema.toString()),
+    schema: buildSchema(schema),
     rootValue: Resolver,
     graphiql: true
   }))

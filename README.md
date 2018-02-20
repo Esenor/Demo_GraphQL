@@ -3,7 +3,7 @@
 ## usage ##
 
     $ npm i
-    $ npm start
+    $ npm run start-dev
 
 ## API consumption ##
 

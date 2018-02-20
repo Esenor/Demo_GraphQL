@@ -5,25 +5,8 @@ module.exports = {
    * Return 2 fake customers
    */
   getSampleCustomer: () => {
-    let customersSize = [Math.floor((Math.random() * 3) + 1)]
-    let addressesAssignation = []
-    for (let i = 0; i < customersSize; i++) {
-      addressesAssignation.push([Math.floor((Math.random() * 4) + 1)])
-    }
-    return getFakeCustomers(addressesAssignation)
+    return Object.assign({}, getFakeCustomer(), { addresses: getFakeAddressesList(2) })
   }
-}
-
-/**
- * Return fake list of Customer
- * @param {[number]} addressesAssignation 
- */
-function getFakeCustomers (addressesAssignation = []) {
-  let customers = []
-  addressesAssignation.forEach((totalAddress) => {
-    customers.push(Object.assign({}, getFakeCustomer(), {addresses: getFakeAddressesList(totalAddress)}))
-  })
-  return customers
 }
 
 /**

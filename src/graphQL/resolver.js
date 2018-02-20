@@ -8,16 +8,16 @@ module.exports = class Resolver {
    * @param {Object} args
    * @return {[Customers]}
    */
-  static getCustomer (args) {
-    return CustomersModel.getCustomer(args.mail)
+  static async getCustomer (args) {
+    return await CustomersModel.getCustomerAsync(args.mail)
   }
   /**
    * Add a customer to model and return a customer
    * @param {Object} args
    * @return {Customer}
    */
-  static addCustomer (args) {
-    return CustomersModel.addCustomer(
+  static async addCustomer (args) {
+    return await CustomersModel.addCustomerAsync(
       args.customer.name,
       args.customer.lastName,
       args.customer.mail,
@@ -25,32 +25,33 @@ module.exports = class Resolver {
     )
   }
   /**
-   * Add customers to model and return an array of customers
-   * @param {Object} args
-   * @return {[Customer]}
+   * 
    */
-  static addCustomers (args) {
-    return CustomersModel.addCustomers(args.customers)
+  static updateCustomer () {
+    return null
+  }
+  /**
+   * 
+   */
+  static removeCustomer () {
+    return null
   }
   /**
    * Return a array of all customer stored in the model
    * @param {Object} args
    * @return {[Customer]}
    */
-  static listCustomers () {
-    return CustomersModel.getCustomers()
+  static async listCustomers () {
+    return await CustomersModel.listCustomersAsync()
   }
 
-  static generateRandomCustomers () {
-    return CustomersModel.addCustomers(devTool.getSampleCustomer())
+  static async generateRandomCustomer () {
+    let customer = devTool.getSampleCustomer()
+    return await CustomersModel.addCustomerAsync(customer.name, customer.lastName, customer.mail, customer.addresses)
   }
 
   static truncateCustomers () {
     CustomersModel.truncateCustomers()
     return 'truncate finish'
-  }
-
-  static customerAdded () {
-    return 'ToDo Subscription'
   }
 }

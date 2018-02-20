@@ -11,6 +11,7 @@ module.exports = class Resolver {
   static async getCustomer (args) {
     return await CustomersModel.getCustomerAsync(args.mail)
   }
+
   /**
    * Add a customer to model and return a customer
    * @param {Object} args
@@ -24,32 +25,27 @@ module.exports = class Resolver {
       args.customer.addresses
     )
   }
-  /**
-   * 
-   */
-  static updateCustomer () {
-    return null
-  }
-  /**
-   * 
-   */
-  static removeCustomer () {
-    return null
-  }
+
   /**
    * Return a array of all customer stored in the model
    * @param {Object} args
    * @return {[Customer]}
    */
-  static async listCustomers () {
-    return await CustomersModel.listCustomersAsync()
+  static async listCustomers (args) {
+    return await CustomersModel.listCustomersAsync(args.keyFilter)
   }
 
+  /**
+   * 
+   */
   static async generateRandomCustomer () {
     let customer = devTool.getSampleCustomer()
     return await CustomersModel.addCustomerAsync(customer.name, customer.lastName, customer.mail, customer.addresses)
   }
 
+  /** 
+   * 
+   */
   static truncateCustomers () {
     CustomersModel.truncateCustomers()
     return 'truncate finish'

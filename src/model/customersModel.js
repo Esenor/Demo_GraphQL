@@ -14,6 +14,7 @@ module.exports = class CustomerModel{
   static async addCustomerAsync (name, lastName, mail, addresses) {
     return addCustomerAsync(name, lastName, mail, addresses)
   }
+
   /**
    * Return a customer find by mail
    * @param {string} mail
@@ -22,13 +23,15 @@ module.exports = class CustomerModel{
   static async getCustomerAsync (mail) {
     return getCustomerAsync(mail)
   }
+
   /**
    * Return all the customers storage
    * @return {[Customer]}
    */
-  static async listCustomersAsync () {    
-    return listCustomersAsync()
+  static async listCustomersAsync (keyPart = '*') {    
+    return listCustomersAsync(keyPart)
   }
+  
   /**
    * Truncate all the customers storage
    */
@@ -37,6 +40,10 @@ module.exports = class CustomerModel{
   }
 }
 
+/**
+ * Get one customer by mail
+ * @param {*} mail 
+ */
 async function getCustomerAsync (mail) {
   return new Promise((resolve, reject) => {
     redis.readValueAsync(mail).then((data) => {
@@ -51,6 +58,13 @@ async function getCustomerAsync (mail) {
   })
 }
 
+/**
+ * Add customer
+ * @param {*} name 
+ * @param {*} lastName 
+ * @param {*} mail 
+ * @param {*} addresses 
+ */
 async function addCustomerAsync (name, lastName, mail, addresses) {
   return new Promise(async(resolve, reject) => {
     getCustomerAsync(mail).then((customer) => {
@@ -68,9 +82,13 @@ async function addCustomerAsync (name, lastName, mail, addresses) {
   })
 }
 
-async function listCustomersAsync () {
+/**
+ * Return all the customer link to the keypart
+ * @param {*} keyPart 
+ */
+async function listCustomersAsync(keyPart) {
   return new Promise((resolve, reject) => {
-    redis.mgetAsync('*').then((response) => {
+    redis.mgetAsync(keyPart).then((response) => {
       resolve(response.map((data) => {
         return JSON.parse(data)
       }))

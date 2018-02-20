@@ -1,4 +1,4 @@
 type Query {
   getCustomer(mail: String!): Customer
-  listCustomers: [Customer]
+  listCustomers(keyFilter: String): [Customer]
 }

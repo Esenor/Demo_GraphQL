@@ -7,7 +7,6 @@ module.exports = class SchemaParser {
    * @return string
    */
   static getSchema(schemaPath = '../schema') {
-
     let gqlFile = fs.readdirSync(path.join(__dirname, schemaPath))
     let schema = gqlFile.reduce((schemaDefinition, fileName) => {
       if (/.gql/.test(fileName)) {

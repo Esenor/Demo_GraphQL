@@ -1,7 +1,5 @@
 type Mutation {
   addCustomer(customer: CustomerInput!): Customer
-  updateCustomer(customer: CustomerInput!): Customer
-  removeCustomer(customer: CustomerInput!): String
   truncateCustomers: String
   generateRandomCustomer: Customer
 }
